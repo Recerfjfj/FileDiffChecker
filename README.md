@@ -1,3 +1,4 @@
+[![Java CI with Gradle](https://github.com/Recerfjfj/FileDiffChecker/actions/workflows/build.yml/badge.svg)](https://github.com/Recerfjfj/FileDiffChecker/actions/workflows/build.yml)
 ***
 
 # Документация проекта FileDiff
