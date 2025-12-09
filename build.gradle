@@ -1,0 +1,50 @@
+plugins {
+    id 'java'
+    id 'application'
+}
+
+group = 'com.filediff'
+version = '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    dependencies {
+    implementation 'com.fasterxml.jackson.core:jackson-databind:2.15.2'
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.9.3'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.9.3'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+}
+}
+
+application {
+    // Указываем Main класс для плагина application (команда ./gradlew run)
+    mainClass = 'com.filediff.Main'
+}
+
+test {
+    useJUnitPlatform()
+}
+
+// Настройка кодировки
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
+}
+
+// --- ВАЖНАЯ ЧАСТЬ: Настройка сборки JAR ---
+jar {
+    manifest {
+        // Указываем Java, какой класс запускать
+        attributes 'Main-Class': 'com.filediff.Main'
+    }
+    
+    // Этот блок берет все библиотеки (Jackson) и упаковывает их внутрь вашего JAR
+    from {
+        configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
+    }
+    
+    // Стратегия обработки дубликатов файлов (нужна для корректной сборки fat-jar)
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+}

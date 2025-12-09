@@ -1,0 +1,2 @@
+﻿hash.algorithm=MD5
+scan.ignore.patterns=*.log,*.tmp,*.bak

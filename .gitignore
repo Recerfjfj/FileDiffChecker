@@ -1,0 +1,9 @@
+﻿.idea/
+.vscode/
+*.iml
+.gradle/
+build/
+src/main/resources/app.properties
+app.properties
+*.log
+*.tmp
